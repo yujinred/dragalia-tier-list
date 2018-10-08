@@ -201,15 +201,15 @@
               <button class="ui button" data-tooltip="Toggle column width" data-position="bottom center" v-on:click="evenwidth = !evenwidth"><i :class="!evenwidth ? 'resize horizontal icon' : 'resize vertical icon'"></i></button>
             </div>
           </th>
-          <th :style="evenwidth ? 'width: calc(100% / 13)' : ''" v-for="weapon in weapontypes">
-            <img style="width: 32px; height: 32px" :src="'weapontypes/' + 'Icon_Weapon_' + weapon + '.png'"></img>
+          <th :style="evenwidth ? 'width: calc(100% / 13)' : ''" v-for="element in elementalTypes">
+            <img style="width: 32px; height: 32px" :src="'elementaltypes/' + 'Icon_Element_' + element + '.png'"></img>
           </th>
         </thead>
         <tbody>
           <tr v-for="rank in rankings.slice(1,rankings.length).reverse()">
             <td>{{rank}}</td>
-            <td v-for="weapon in weapontypes" :id="rank + '-' + weapon" style="padding: 0">
-                  <a href="#!" v-on:click="selectHero(unit.name)" v-for="unit in getRankedHeroes(weapon, rank)">
+            <td v-for="element in elementalTypes" :id="rank + '-' + element" style="padding: 0">
+                  <a href="#!" v-on:click="selectHero(unit.name)" v-for="unit in getRankedHeroes(element, rank)">
                     <img :name="unit.name" style="width: 70px; height: 70px" :src="'images/' + unit.id + '_01_r0' + unit.rarity + '.png'"></img>
                   </a>
             </td>
@@ -236,6 +236,7 @@ new Vue({
     rankings: ['Unranked', 'C', 'B', 'A', 'A+', 'S-', 'S', 'S+'],
     weapontypes: ['Sword', 'Blade', 'Dagger', 'Axe', 'Lance', 'Bow', 'Wand', 'Staff'],
     charactertypes: ['Attack', 'Defense', 'Healing', 'Support'],
+    elementalTypes: ['Flame', 'Water', 'Wind', 'Shadow', 'Light'],
     selectedElement: "",
     searchFilter: "",
     selectedWeapon: "",
@@ -298,8 +299,8 @@ new Vue({
       this.incrementIndex()
       this.all_heroes.find(hero=>hero.name === name).rating = rating
     },
-    getRankedHeroes: function(weapontype, rank) {
-      return this.all_heroes.filter(hero=> hero.weaponType.toLowerCase() == weapontype.toLowerCase() && hero.rating == this.rankings.indexOf(rank))
+    getRankedHeroes: function(elementaltype, rank) {
+      return this.all_heroes.filter(hero=> hero.elementalType.toLowerCase() == elementaltype.toLowerCase() && hero.rating == this.rankings.indexOf(rank))
     },
     randomize: function() {
       length = this.rankings.length - 1
