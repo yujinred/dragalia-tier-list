@@ -207,7 +207,7 @@
         </thead>
         <tbody>
           <tr v-for="rank in rankings.slice(1,rankings.length).reverse()">
-            <td>{{rank}}</td>
+            <td><img style="width: 32px; height: 32px" :src="'weapontypes/' + 'Icon_Weapon_' + rank + '.png'"></img></td>
             <td v-for="element in elementalTypes" :id="rank + '-' + element" style="padding: 0">
                   <a href="#!" v-on:click="selectHero(unit.name)" v-for="unit in getRankedHeroes(element, rank)">
                     <img :name="unit.name" style="width: 70px; height: 70px" :src="'images/' + unit.id + '_01_r0' + unit.rarity + '.png'"></img>
@@ -232,8 +232,8 @@ new Vue({
   data: {
     all_heroes: heroes,
     hero_index: Math.floor(Math.random()*heroes.length),
-    originalRankings: ['Unranked', 'C', 'B', 'A', 'A+', 'S-', 'S', 'S+'],
-    rankings: ['Unranked', 'C', 'B', 'A', 'A+', 'S-', 'S', 'S+'],
+    originalRankings: ['Unranked', 'Staff', 'Wand', 'Bow', 'Lance', 'Axe', 'Dagger', 'Blade', 'Sword'],
+    rankings: ['Unranked', 'Staff', 'Wand', 'Bow', 'Lance', 'Axe', 'Dagger', 'Blade', 'Sword'],
     weapontypes: ['Sword', 'Blade', 'Dagger', 'Axe', 'Lance', 'Bow', 'Wand', 'Staff'],
     charactertypes: ['Attack', 'Defense', 'Healing', 'Support'],
     elementalTypes: ['Flame', 'Water', 'Wind', 'Shadow', 'Light'],
