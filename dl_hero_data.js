@@ -574,4 +574,32 @@ heroes = [
 "rarity": "4",
 "elementalType": "Flame",
 "charaType": "Healing"
-}]
+},
+{
+    "id": "200002",
+    "name": "Elisanne",
+    "title": "Vampaladyn",
+    "weaponType": "Lance",
+    "rarity": "5",
+    "elementalType": "Light",
+    "charaType": "Support"
+},
+{
+    "id": "210047",
+    "name": "Althemia",
+    "title": "Diametric Vampire",
+    "weaponType": "Staff",
+    "rarity": "4",
+    "elementalType": "Light",
+    "charaType": "Healing"
+},
+{
+    "id": "210049",
+    "name": "Edward",
+    "title": "Bloodsucking Butler",
+    "weaponType": "Blade",
+    "rarity": "3",
+    "elementalType": "Light",
+    "charaType": "Attack"
+}
+]

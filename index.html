@@ -208,7 +208,7 @@
           <tr v-for="rank in rankings.slice(1,rankings.length).reverse()">
             <td>{{rank}}</td>
             <td v-for="element in elementalTypes" :id="rank + '-' + element" style="padding: 0">
-                  <a href="#!" v-on:click="selectHero(unit.name)" v-for="unit in getRankedHeroes(element, rank)">
+                  <a href="#!" v-on:click="selectHero(unit.id)" v-for="unit in getRankedHeroes(element, rank)">
                     <img :name="unit.name" style="width: 70px; height: 70px" :src="'images/' + unit.id + '_01_r0' + unit.rarity + '.png'"></img>
                   </a>
             </td>
@@ -313,9 +313,8 @@ new Vue({
         hero.rating = 0
       })
     },
-    selectHero: function(name) {
-      console.log("selected hero "+ name)
-      this.hero_index = this.all_heroes.map(hero=>hero.name).indexOf(name)
+    selectHero: function(id) {
+      this.hero_index = this.all_heroes.map(hero=>hero.id).indexOf(id)
     },
     textToRank: function (text) {
       try {
