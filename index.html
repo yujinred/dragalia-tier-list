@@ -124,7 +124,7 @@
       <!-- Hero List -->
       <div style="height: 300px;" v-show="!importing && !exporting">
         <div class="ui selection list" style="height: 100%; overflow-y: scroll;">
-          <div :name="unit.name" class="item" v-for="unit in hero_list" v-on:click.stop="selectHero(unit.name)">
+          <div :name="unit.name" class="item" v-for="unit in hero_list" v-on:click.stop="selectHero(unit.id)">
             <img class="ui avatar image" :src="'images/' + unit.id + '_01_r0' + unit.rarity + '.png'">
             <div class="content">
               <div class="header">{{ unit.name }}</div>
