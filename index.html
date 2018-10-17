@@ -36,7 +36,7 @@
             <div class="ui selection list">
               <button class="ui button"
                       v-for="rank in rankings.slice(1,rankings.length)"
-                      v-on:click="addRank(hero.name, rankings.indexOf(rank))"
+                      v-on:click="addRank(hero.id, rankings.indexOf(rank))"
                       style="margin: 2px">
                 {{ rank }}</button>
             </div>
@@ -270,7 +270,7 @@ new Vue({
     },
     rankToText: function () {
       ratings = [{rankings: this.rankings}];
-      ratings = ratings.concat(this.all_heroes.map(hero => ({name: hero.name, rating: hero.rating})));
+      ratings = ratings.concat(this.all_heroes.map(hero => ({id: hero.id, name: hero.name, rating: hero.rating})));
       return JSON.stringify(ratings);
     },
   },
@@ -281,23 +281,23 @@ new Vue({
     },
     incrementIndex: function(event) {
       if(this.hero_list.length == 0) return
-      curHeroName = this.all_heroes[this.hero_index].name
-      nextHeroListIndex = this.hero_list.map(hero => hero.name).indexOf(curHeroName)+1
+      curHeroid = this.all_heroes[this.hero_index].id
+      nextHeroListIndex = this.hero_list.map(hero => hero.id).indexOf(curHeroid)+1
       if (nextHeroListIndex >= this.hero_list.length) { nextHeroListIndex = 0 }
-      nextHeroName = this.hero_list[nextHeroListIndex].name
-      this.hero_index = this.all_heroes.map(hero => hero.name).indexOf(nextHeroName)
+      nextHeroid = this.hero_list[nextHeroListIndex].id
+      this.hero_index = this.all_heroes.map(hero => hero.id).indexOf(nextHeroid)
     },
     decrementIndex: function(event) {
       if(this.hero_list.length == 0) return
-      curHeroName = this.all_heroes[this.hero_index].name
-      nextHeroListIndex = this.hero_list.map(hero => hero.name).indexOf(curHeroName)-1
+      curHeroid = this.all_heroes[this.hero_index].id
+      nextHeroListIndex = this.hero_list.map(hero => hero.id).indexOf(curHeroid)-1
       if (nextHeroListIndex < 0) { nextHeroListIndex = this.hero_list.length - 1 }
-      nextHeroName = this.hero_list[nextHeroListIndex].name
-      this.hero_index = this.all_heroes.map(hero => hero.name).indexOf(nextHeroName)
+      nextHeroid = this.hero_list[nextHeroListIndex].id
+      this.hero_index = this.all_heroes.map(hero => hero.id).indexOf(nextHeroid)
     },
-    addRank: function(name, rating) {
+    addRank: function(id, rating) {
       this.incrementIndex()
-      this.all_heroes.find(hero=>hero.name === name).rating = rating
+      this.all_heroes.find(hero=>hero.id === id).rating = rating
     },
     getRankedHeroes: function(elementaltype, rank) {
       return this.all_heroes.filter(hero=> hero.elementalType.toLowerCase() == elementaltype.toLowerCase() && hero.rating == this.rankings.indexOf(rank))
@@ -331,7 +331,12 @@ new Vue({
           this._resetRanking();
         }
         
-        ratings.forEach(rate => { this.all_heroes.find(hero=> hero.name == rate.name).rating = rate.rating })
+        if (ratings[0] !== null && ratings[0].id === undefined) {
+          // deprecate this next release
+          ratings.forEach(rate => { this.all_heroes.find(hero=> hero.name == rate.name).rating = rate.rating })
+        } else {
+          ratings.forEach(rate => { this.all_heroes.find(hero=> hero.id == rate.id).rating = rate.rating })
+        }
       }
       catch (err) {
 
